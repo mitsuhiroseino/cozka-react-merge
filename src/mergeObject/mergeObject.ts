@@ -15,14 +15,19 @@ export default function mergeObject<O, R>(
   strategies: MergeStrategyItem[],
   options: MergeObjectOptions<O, R> = {},
 ): R {
-  const { initialValue = () => ({}) as R } = options;
+  const { initialValue = () => ({}) as R, excludeUnmatched } = options;
   return mergeValue<O, R>(
     object,
     (currentResult, value) => {
       if (isFunction(value)) {
-        return _mergeObject(currentResult, value(currentResult), strategies);
+        return _mergeObject(
+          currentResult,
+          value(currentResult),
+          strategies,
+          excludeUnmatched,
+        );
       } else if (isPlainObject(value)) {
-        return _mergeObject(currentResult, value, strategies);
+        return _mergeObject(currentResult, value, strategies, excludeUnmatched);
       }
     },
     {
@@ -35,12 +40,15 @@ function _mergeObject<O>(
   currentResult: any,
   object: O,
   strategies: MergeStrategyItem[],
+  excludeUnmatched: boolean,
 ) {
   let isMerged = false;
   for (const key in object) {
     const value: any = object[key];
+    let isMatched = false;
     for (const { condition, initialValue, strategy } of strategies) {
       if (_matchCondition(condition, key, value)) {
+        isMatched = true;
         let currentValue = currentResult[key];
         if (currentValue === undefined) {
           if (isFunction(initialValue)) {
@@ -57,6 +65,9 @@ function _mergeObject<O>(
         }
         break;
       }
+    }
+    if (!isMatched && !excludeUnmatched) {
+      currentResult[key] = value;
     }
   }
   return isMerged ? currentResult : undefined;

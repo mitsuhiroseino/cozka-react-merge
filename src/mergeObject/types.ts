@@ -34,4 +34,9 @@ export type MergeCondition =
   | RegExp
   | ((key: PropertyKey, value: unknown) => boolean);
 
-export type MergeObjectOptions<V = any, R = any> = MergeValueOptions<V, R> & {};
+export type MergeObjectOptions<V = any, R = any> = MergeValueOptions<V, R> & {
+  /**
+   * MergeStrategyItemが適用されなかったものは結果に反映しない
+   */
+  excludeUnmatched?: boolean;
+};
