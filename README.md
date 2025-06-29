@@ -1,1 +1,1 @@
-# cozka-react-composite-props
+# cozka-react-merge
