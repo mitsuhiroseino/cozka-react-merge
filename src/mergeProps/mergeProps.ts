@@ -1,3 +1,5 @@
+import isFunction from 'lodash-es/isFunction';
+import isString from 'lodash-es/isString';
 import {
   classNameInitialValue,
   classNameStrategy,
@@ -7,6 +9,8 @@ import mergeObject from '../mergeObject';
 import { refInitialValue, refStrategy } from '../mergeRef/params';
 import { styleInitialValue, styleStrategy } from '../mergeStyle/params';
 import { PropsResult, PropsValue } from './types';
+
+const handlerRegexp = /^on[A-Z].*$/;
 
 /**
  * プロパティのマージを行う関数
@@ -20,7 +24,8 @@ export default function mergeProps<PROPS, REF>(
     propsList,
     [
       {
-        condition: /^on[A-Z].*$/,
+        condition: (key, value) =>
+          isString(key) && handlerRegexp.test(key) && isFunction(value),
         strategy: handlerStrategy,
         initialValue: handlerInitialValue,
       },
@@ -41,7 +46,6 @@ export default function mergeProps<PROPS, REF>(
       },
       {
         strategy: (current, value) => value,
-        initialValue: undefined,
       },
     ],
     {

@@ -1,6 +1,6 @@
 {
   "name": "@cozka/react-merge",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "keywords": [
     "react"
   ],
@@ -32,7 +32,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@cozka/react-utils": "^0.4.1",
+    "@cozka/react-utils": "^0.4.4",
     "@cozka/utils-object": "0.1.2",
     "clsx": "^2.1.1",
     "lodash-es": "^4.17.21"
