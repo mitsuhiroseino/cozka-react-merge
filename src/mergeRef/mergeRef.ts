@@ -4,11 +4,11 @@ import { RefResult, RefValue } from './types';
 
 /**
  * refのマージを行う関数
- * @param refs
+ * @param refList
  * @returns
  */
-export default function mergeRef<T>(...refs: RefValue<T>[]): RefResult<T> {
-  return mergeValue<RefValue<T>, RefResult<T>>(refs, refStrategy<T>, {
+export default function mergeRef<T>(...refList: RefValue<T>[]): RefResult<T> {
+  return mergeValue<RefValue<T>, RefResult<T>>(refList, refStrategy<T>, {
     initialValue: refInitialValue,
   });
 }

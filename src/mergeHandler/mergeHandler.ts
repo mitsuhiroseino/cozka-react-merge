@@ -4,13 +4,17 @@ import { HandlerResult, HandlerValue } from './types';
 
 /**
  * ハンドラーのマージを行う関数
- * @param handlers
+ * @param handlerList
  * @returns
  */
 export default function mergeRef<T>(
-  ...handlers: HandlerValue[]
+  ...handlerList: HandlerValue[]
 ): HandlerResult {
-  return mergeValue<HandlerValue, HandlerResult>(handlers, handlerStrategy<T>, {
-    initialValue: handlerInitialValue,
-  });
+  return mergeValue<HandlerValue, HandlerResult>(
+    handlerList,
+    handlerStrategy<T>,
+    {
+      initialValue: handlerInitialValue,
+    },
+  );
 }

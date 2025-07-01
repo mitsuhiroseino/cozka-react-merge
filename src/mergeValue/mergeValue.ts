@@ -7,17 +7,17 @@ import {
 
 /**
  * 値のマージを行う汎用的な関数
- * @param values 処理対象の値
+ * @param valueList 処理対象の値
  * @param strategy マージ処理
  * @param options オプション
  * @returns
  */
 export default function mergeValue<V, R>(
-  values: V[],
+  valueList: V[],
   strategy: MergeStrategy<V, R>,
   options: MergeValueOptions<V, R> = {},
 ): R {
-  return _mergeArray(values, strategy, options);
+  return _mergeArray(valueList, strategy, options);
 }
 
 function _mergeValue<V, R>(

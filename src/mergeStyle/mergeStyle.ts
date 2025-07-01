@@ -4,11 +4,11 @@ import { StyleResult, StyleValue } from './types';
 
 /**
  * スタイルのマージを行う関数
- * @param styles
+ * @param styleList
  * @returns
  */
-export default function mergeStyle(...styles: StyleValue[]): StyleResult {
-  return mergeValue<StyleValue, StyleResult>(styles, styleStrategy, {
+export default function mergeStyle(...styleList: StyleValue[]): StyleResult {
+  return mergeValue<StyleValue, StyleResult>(styleList, styleStrategy, {
     initialValue: styleInitialValue,
   });
 }

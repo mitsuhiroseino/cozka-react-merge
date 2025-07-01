@@ -4,14 +4,14 @@ import { ClassNameResult, ClassNameValue } from './types';
 
 /**
  * クラスのマージを行う関数
- * @param classNames
+ * @param classNameList
  * @returns
  */
 export default function mergeClassName(
-  ...classNames: ClassNameValue[]
+  ...classNameList: ClassNameValue[]
 ): ClassNameResult {
   return mergeValue<ClassNameValue, ClassNameResult>(
-    classNames,
+    classNameList,
     classNameStrategy,
     {
       initialValue: classNameInitialValue,

@@ -5,19 +5,19 @@ import { MergeCondition, MergeObjectOptions, MergeStrategyItem } from './types';
 
 /**
  * オブジェクトのプロパティ値のマージを行う汎用的な関数
- * @param object 処理対象の値
+ * @param objectList 処理対象の値
  * @param strategies マージ処理
  * @param options オプション
  * @returns
  */
 export default function mergeObject<O, R>(
-  object: O[],
+  objectList: O[],
   strategies: MergeStrategyItem[],
   options: MergeObjectOptions<O, R> = {},
 ): R {
   const { initialValue = () => ({}) as R, excludeUnmatched } = options;
   return mergeValue<O, R>(
-    object,
+    objectList,
     (currentResult, value) => {
       if (isFunction(value)) {
         return _mergeObject(
